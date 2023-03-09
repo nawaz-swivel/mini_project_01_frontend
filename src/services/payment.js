@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = 'http://localhost:8081/ignite-payment-service';
+const url = process.env.REACT_APP_PAYMENT_API_URL;
 
 const PAYMENT_API = axios.create({baseURL: url});
 

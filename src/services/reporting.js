@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = 'http://localhost:8081/ignite-reporting-service';
+const url = process.env.REACT_APP_REPORTING_API_URL;
 
 const REPORTING_API = axios.create({baseURL: url});
 
