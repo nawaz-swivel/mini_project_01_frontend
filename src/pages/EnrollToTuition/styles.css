@@ -1,0 +1,11 @@
+.error-msg {
+    margin-top: 10px;
+    color: red;
+    font-size: large;
+}
+
+.success-msg {
+    margin-top: 10px;
+    color: green;
+    font-size: large;
+}
