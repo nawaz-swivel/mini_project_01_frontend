@@ -13,7 +13,7 @@ const MakePayment = () => {
         <>
             <div>MAKE PAYMENT SCREEN</div>
             <select onChange={e => setMonth(e.target.value)}>
-                <option value=''>Select a tuition</option>
+                <option value=''>Select a payment month</option>
                 {
                     Month.map(m => (
                         <option key={m} value={m}>{m}</option>
