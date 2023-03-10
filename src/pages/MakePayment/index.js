@@ -24,7 +24,7 @@ const MakePayment = () => {
                 disabled={!(month && student.student)}
                 onClick={() => makeTuitionPayment(student.student.studentId, student.student.tuitionId, month,
                     dispatch, setError, setSuccess)}
-            >Enroll into tuition</button>
+            >Make Tuition Payment</button>
             {
                 error ? (
                     <p className='error-msg'>{error.message}</p>
