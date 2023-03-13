@@ -3,6 +3,7 @@ on:
   push:
     branches: [ "production" ]
 env:
+  CI: false
   REACT_APP_REGISTRATION_API_URL: ${{ secrets.REGISTRATION_API_URL }}
   REACT_APP_PAYMENT_API_URL: ${{ secrets.PAYMENT_API_URL }}
   REACT_APP_REPORTING_API_URL: ${{ secrets.REPORTING_API_URL }}
