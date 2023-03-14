@@ -10,15 +10,26 @@ const StudentDashboard = () => {
     if (!auth.user) return (<Navigate to='/'/>);
 
     return (
-        <div>
-            HI WELCOME MR. {auth.user.name.toUpperCase()}
-            <button onClick={() => dispatch({type: types.LOGOUT})}>logout</button>
-            <Link to='/student/class/enroll'>
-                <button>Enroll into class</button>
-            </Link>
-            <Link to='/student/payment/make'>
-                <button>Make class payment</button>
-            </Link>
+        <div className='main-container'>
+            <div className='main-heading'>
+                <h3>HI WELCOME MR. {auth.user.name.toUpperCase()}</h3>
+                <button className='btn btn-info' onClick={() => dispatch({type: types.LOGOUT})}>logout</button>
+            </div>
+            <div>
+                <Link to='/student/class/enroll'>
+                    <button className='btn btn-primary'>Enroll into class</button>
+                </Link>
+            </div>
+            <div>
+                <Link to='/student/payment/make'>
+                    <button className='btn btn-success'>Make class payment</button>
+                </Link>
+            </div>
+            <div>
+                <Link to='/student/class/unenroll'>
+                    <button className='btn btn-danger'>Unenrol from class</button>
+                </Link>
+            </div>
         </div>
     )
 };

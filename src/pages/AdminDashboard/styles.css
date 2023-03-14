@@ -1,0 +1,21 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 500px;
+}
+
+.btn {
+    font-size: 25px;
+}
+
+.main-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 60vw;
+}
+
+

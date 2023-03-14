@@ -11,8 +11,8 @@ const CreateTuition = () => {
 
     return (
         <div>
-            CREATE TUITION
-            <section>
+            <h3>CREATE TUITION</h3>
+            <section className='mt-3'>
                 <form>
                     <div className="form-group">
                         <label htmlFor="nameInput">Tuition Name</label>
@@ -27,7 +27,7 @@ const CreateTuition = () => {
                     <button
                         style={{marginRight: 10}}
                         type="submit"
-                        className="btn btn-primary"
+                        className="btn btn-success"
                         onClick={(e) => createTuition(e, name, location, dispatch, setError, setSuccess)}
                     >
                         Create Tuition

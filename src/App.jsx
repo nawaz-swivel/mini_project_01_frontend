@@ -12,6 +12,9 @@ import Register from "./pages/Register";
 import EnrollToTuition from "./pages/EnrollToTuition";
 import MakePayment from "./pages/MakePayment";
 import TuitionReport from "./pages/TuitionReport";
+import UnEnrollFromTuition from "./pages/UnEnrollFromTuition";
+import RemoveStudent from "./pages/RemoveStudent";
+import RemoveTuition from "./pages/RemoveTuition";
 
 export default function App() {
     return (
@@ -47,17 +50,25 @@ export default function App() {
                         <Route
                             path="/admin"
                             element={
-
                                 <AdminDashboard/>
-
+                            }
+                        />
+                        <Route
+                            path="/admin/student/remove"
+                            element={
+                                <RemoveStudent/>
+                            }
+                        />
+                        <Route
+                            path="/admin/tuition/remove"
+                            element={
+                                <RemoveTuition/>
                             }
                         />
                         <Route
                             path="/student"
                             element={
-
                                 <StudentDashboard/>
-
                             }
                         />
                         <Route
@@ -76,6 +87,12 @@ export default function App() {
                             path="/student/class/enroll"
                             element={
                                 <EnrollToTuition/>
+                            }
+                        />
+                        <Route
+                            path="/student/class/unenroll"
+                            element={
+                                <UnEnrollFromTuition/>
                             }
                         />
                         <Route

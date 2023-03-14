@@ -1,10 +1,8 @@
-import React, {useContext, useState} from "react";
-import {StudentContext} from "../../others/Context";
+import React, {useState} from "react";
+import {deleteTuition} from "./helper";
 import useRegGetAll from "../../services/useRegGetAll";
-import {addStudentToTuition} from "./helper";
 
-const EnrollToTuition = () => {
-    const {student, dispatch} = useContext(StudentContext);
+const RemoveTuition = () => {
     const {data, error: error2, loading} = useRegGetAll("/api/v1/tuition/get/all");
     const [selectedTuition, setSelectedTuition] = useState('');
     const [error, setError] = useState(null);
@@ -13,7 +11,7 @@ const EnrollToTuition = () => {
     return (
         <div className='main-container'>
             <div>
-                <h3>ENROLL TO TUITION</h3>
+                <h3>REMOVE TUITION</h3>
                 <div className='main-heading'>
                     <select className='main-select' onChange={e => setSelectedTuition(e.target.value)}>
                         <option value=''>Select a tuition</option>
@@ -21,13 +19,13 @@ const EnrollToTuition = () => {
                             <option key={t.tuitionId} value={t.tuitionId}>{t.name} - {t.location}</option>
                         ))}
                     </select>
-                    <button className='btn btn-success'
-                            disabled={!(selectedTuition && student.student)}
-                            onClick={() => addStudentToTuition(student.student.studentId, selectedTuition, dispatch, setError, setSuccess)}
-                    >Enroll into tuition
-                    </button>
+                    <button className='btn btn-danger'
+                        disabled={!selectedTuition}
+                        onClick={() => deleteTuition(selectedTuition, setError, setSuccess)}
+                    >Delete Tuition</button>
                 </div>
             </div>
+
             {
                 error ? (
                     <p className='error-msg'>{error.message}</p>
@@ -39,7 +37,7 @@ const EnrollToTuition = () => {
                 ) : null
             }
         </div>
-    );
+    )
 }
 
-export default EnrollToTuition;
+export default RemoveTuition;

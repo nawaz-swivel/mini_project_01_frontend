@@ -45,6 +45,20 @@ export const addStudentToTuition = async (url, body = null, params = null) => {
     return { data };
 }
 
+export const removeStudentFromTuition = async (url, body = null, params = null) => {
+    let data;
+
+    try {
+        const response = await REGISTRATION_API.post(url, body, { params: params });
+        if (response.status === 200)
+            data = response.data;
+    } catch (e) {
+        throw e.response.data;
+    }
+
+    return { data };
+}
+
 export const makeTuitionPayment = async (url, body = null, params = null) => {
     let data;
 
@@ -78,6 +92,34 @@ export const findStudentById = async (url) => {
 
     try {
         const response = await REGISTRATION_API.get(url);
+        if (response.status === 200)
+            data = response.data;
+    } catch (e) {
+        throw e.response.data;
+    }
+
+    return { data };
+}
+
+export const deleteStudent = async (url) => {
+    let data;
+
+    try {
+        const response = await REGISTRATION_API.delete(url);
+        if (response.status === 200)
+            data = response.data;
+    } catch (e) {
+        throw e.response.data;
+    }
+
+    return { data };
+}
+
+export const deleteTuition = async (url) => {
+    let data;
+
+    try {
+        const response = await REGISTRATION_API.delete(url);
         if (response.status === 200)
             data = response.data;
     } catch (e) {

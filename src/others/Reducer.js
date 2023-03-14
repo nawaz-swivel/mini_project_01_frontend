@@ -29,6 +29,7 @@ export const studentReducer = (studentState, action) => {
         case types.LOGIN_STUDENT:
             return {...studentState, student: action.student};
         case types.ADD_TUITION_STUDENT:
+        case types.REMOVE_TUITION_STUDENT:
             newStudentState.student.tuitionId = action.student.tuitionId;
             newStudentState.student.tuitionJoinedOn = action.student.tuitionJoinedOn;
             return newStudentState;
