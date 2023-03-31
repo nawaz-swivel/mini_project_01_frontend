@@ -8,13 +8,13 @@ import CreateTuition from "./pages/CreateTuition";
 import AdminDashboard from "./pages/AdminDashboard";
 import StudentDashboard from "./pages/StudentDashboard";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
-import EnrollToTuition from "./pages/EnrollToTuition";
+import AddStudentToTuition from "./pages/AddStudentToTuition";
 import MakePayment from "./pages/MakePayment";
 import TuitionReport from "./pages/TuitionReport";
-import UnEnrollFromTuition from "./pages/UnEnrollFromTuition";
 import RemoveStudent from "./pages/RemoveStudent";
 import RemoveTuition from "./pages/RemoveTuition";
+import CreateStudent from "./pages/CreateStudent";
+import RemoveStudentFromTuition from "./pages/RemoveStudentFromTuition";
 
 export default function App() {
     return (
@@ -40,17 +40,15 @@ export default function App() {
                             }
                         />
                         <Route
-                            path="/register"
-                            element={
-                                <>
-                                    <Register/>
-                                </>
-                            }
-                        />
-                        <Route
                             path="/admin"
                             element={
                                 <AdminDashboard/>
+                            }
+                        />
+                        <Route
+                            path="/admin/student/create"
+                            element={
+                                <CreateStudent/>
                             }
                         />
                         <Route
@@ -84,15 +82,15 @@ export default function App() {
                             }
                         />
                         <Route
-                            path="/student/class/enroll"
+                            path="/admin/add/student"
                             element={
-                                <EnrollToTuition/>
+                                <AddStudentToTuition/>
                             }
                         />
                         <Route
-                            path="/student/class/unenroll"
+                            path="/admin/remove/student"
                             element={
-                                <UnEnrollFromTuition/>
+                                <RemoveStudentFromTuition/>
                             }
                         />
                         <Route

@@ -1,10 +1,12 @@
-import React, {useState} from "react";
-import useRegGetAll from "../../services/useRegGetAll";
+import React, {useContext, useState} from "react";
+import useStudentGetAll from "../../services/useStudentGetAll";
 import {deleteStudent} from "./helper";
 import './style.css';
+import {TokenContext} from "../../others/Context";
 
 const   RemoveStudent = () => {
-    const {data, error: error2, loading} = useRegGetAll("/api/v1/student/get/all");
+    const { token } = useContext(TokenContext);
+    const {data, error: error2, loading} = useStudentGetAll("/api/v1/student/get/all", token.token.data.access_token);
     const [selectedStudent, setSelectedStudent] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
@@ -17,12 +19,12 @@ const   RemoveStudent = () => {
                     <select className='main-select' onChange={e => setSelectedStudent(e.target.value)}>
                         <option value=''>Select a student</option>
                         {data && data.students.map((s) => (
-                            <option key={s.studentId} value={s.studentId}>{s.name}</option>
+                            <option key={s.studentId} value={s.studentId}>{s.username}</option>
                         ))}
                     </select>
                     <button className='btn btn-danger'
                             disabled={!selectedStudent}
-                            onClick={() => deleteStudent(selectedStudent, setError, setSuccess)}
+                            onClick={() => deleteStudent(selectedStudent, token.token.data.access_token, setError, setSuccess)}
                     >Delete Student</button>
                 </div>
             </div>

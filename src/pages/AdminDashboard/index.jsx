@@ -1,13 +1,13 @@
 import React, {useContext} from 'react';
-import {AuthContext} from "../../others/Context";
+import {AuthContext, TokenContext} from "../../others/Context";
 import * as types from '../../others/ActionType';
 import {Link, Navigate} from "react-router-dom";
 import './styles.css';
 
 const AdminDashboard = () => {
-    const {auth, dispatch} = useContext(AuthContext);
+    const {token, dispatch} = useContext(TokenContext);
 
-    if (!auth.user) return (<Navigate to='/'/>);
+    if (!token.token) return (<Navigate to='/'/>);
 
     return (
         <div className='main-container'>
@@ -26,8 +26,23 @@ const AdminDashboard = () => {
                 </Link>
             </div>
             <div>
+                <Link to='/admin/student/create'>
+                    <button className='btn btn-success'>Create Student</button>
+                </Link>
+            </div>
+            <div>
                 <Link to='/admin/student/remove'>
                     <button className='btn btn-danger'>Remove Student</button>
+                </Link>
+            </div>
+            <div>
+                <Link to='/admin/add/student'>
+                    <button className='btn btn-info'>Add Student To Tuition</button>
+                </Link>
+            </div>
+            <div>
+                <Link to='/admin/remove/student'>
+                    <button className='btn btn-danger'>Remove Student From Tuition</button>
                 </Link>
             </div>
             <div>

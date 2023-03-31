@@ -1,9 +1,9 @@
 import * as api from "../../services/api";
 
-export const generateReport = (tuitionId, month, setError, setData) => {
+export const generateReport = (token, tuitionId, month, setError, setData) => {
     let data = [];
 
-    api.generateReport(`/api/v1/report/get/${tuitionId}/${month}`).then(res => {
+    api.generateReport(token, `/api/v1/report/get/${tuitionId}/${month}`).then(res => {
         setError(null);
         for (const st of res.data.data.paidReport.studentId) {
             data.push({
@@ -19,10 +19,10 @@ export const generateReport = (tuitionId, month, setError, setData) => {
         }
 
         const promises = data.map(d => {
-            return api.findStudentById(`/api/v1/student/get/${d.studentId}`).then(r => {
+            return api.findStudentById(token,`/api/v1/student/get/${d.studentId}`).then(r => {
                 return {
                     studentId: d.studentId,
-                    name: r.data.data.name,
+                    name: r.data.data.username,
                     status: d.status,
                 }
             });

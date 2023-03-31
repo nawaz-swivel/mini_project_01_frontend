@@ -1,25 +1,26 @@
 import React, {useContext} from "react";
 import './styles.css';
-import {AuthContext} from "../../others/Context";
+import {AuthContext, TokenContext} from "../../others/Context";
 import {Navigate} from "react-router-dom";
 
 export default function Home() {
-    const { auth } = useContext(AuthContext);
+    const { token } = useContext(TokenContext);
 
-    if (!auth.user) return <Navigate to='/login' />
+    if (!token.token) return <Navigate to='/login' />
 
     return (
         <>
             <section>
-                <h1 className='heading'>Welcome. {auth.user.name}</h1>
+                {/*<h1 className='heading'>Welcome. {token.token.data.username}</h1>*/}
                 {
-                    auth.user.name === 'ADMIN' ? (
+                    token.token.data.data.role === 'ADMIN' ? (
                         <Navigate to="/admin" />
                     ) : (
                         <Navigate to="/student" />
                     )
                 }
             </section>
+            <h1>Home</h1>
         </>
     );
 }

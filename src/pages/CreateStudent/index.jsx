@@ -1,37 +1,36 @@
 import React, {useContext, useState} from "react";
-import {TokenContext, TuitionContext} from "../../others/Context";
-import {createTuition} from "./helper";
+import {createStudent} from "./helper";
+import {TokenContext} from "../../others/Context";
 
-const CreateTuition = () => {
+const CreateStudent = () => {
     const { token } = useContext(TokenContext);
-    const { dispatch } = useContext(TuitionContext);
-    const [name, setName] = useState('');
-    const [location, setLocation] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
 
     return (
         <div>
-            <h3>CREATE TUITION</h3>
+            <h3>CREATE STUDENT</h3>
             <section className='mt-3'>
                 <form>
                     <div className="form-group">
-                        <label htmlFor="nameInput">Tuition Name</label>
-                        <input type="text" className="form-control" id="nameInput" placeholder="Enter tuition name"
-                               value={name} onChange={e => setName(e.target.value)}/>
+                        <label htmlFor="nameInput">Student Name</label>
+                        <input type="text" className="form-control" id="nameInput" placeholder="Enter student name"
+                               value={username} onChange={e => setUsername(e.target.value)}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="locationInput">Location</label>
-                        <input type="text" className="form-control" id="locationInput" placeholder="Location"
-                               value={location} onChange={e => setLocation(e.target.value)}/>
+                        <label htmlFor="locationInput">Password</label>
+                        <input type="text" className="form-control" id="locationInput" placeholder="Password"
+                               value={password} onChange={e => setPassword(e.target.value)}/>
                     </div>
                     <button
                         style={{marginRight: 10}}
                         type="submit"
                         className="btn btn-success"
-                        onClick={(e) => createTuition(e, token.token.data.access_token, name, location, dispatch, setError, setSuccess)}
+                        onClick={(e) => createStudent(e, token.token.data.access_token, username, password, setError, setSuccess)}
                     >
-                        Create Tuition
+                        Create Student
                     </button>
                     {
                         success ? (
@@ -49,4 +48,4 @@ const CreateTuition = () => {
     );
 };
 
-export default CreateTuition;
+export default CreateStudent;

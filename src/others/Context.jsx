@@ -1,15 +1,32 @@
 import React, {useMemo, useReducer} from "react";
-import {authReducer, studentReducer, tuitionReducer} from "./Reducer";
+import {authReducer, studentReducer, tokenReducer, tuitionReducer} from "./Reducer";
 import {CombineComponents} from "./CombineComponents";
 
 // app context
 const providers = [
+    TokenProvider,
     AuthProvider,
     TuitionProvider,
     StudentProvider,
 ];
 
 export const AppContextProvider = CombineComponents(...providers);
+
+// token context
+export const TokenContext = React.createContext(null);
+
+let initialTokenState = { token: null }
+
+export function TokenProvider(props) {
+    const [token, dispatch] = useReducer(tokenReducer, initialTokenState);
+    const tokenProviderValue = useMemo(() => ({token, dispatch}), [token, dispatch]);
+
+    return (
+        <TokenContext.Provider value={tokenProviderValue}>
+            {props.children}
+        </TokenContext.Provider>
+    )
+}
 
 // auth context
 export const AuthContext = React.createContext(null);

@@ -1,10 +1,12 @@
 import React, {useContext, useState} from "react";
 import {month as Month} from "../../others/Month";
-import {StudentContext} from "../../others/Context";
+import {TokenContext} from "../../others/Context";
 import {makeTuitionPayment} from "./helper";
+import useStudentGet from "../../services/useStudentGet";
 
 const MakePayment = () => {
-    const {student, dispatch} = useContext(StudentContext);
+    const { token } = useContext(TokenContext);
+    const {data, error: error1, loading} = useStudentGet(`/api/v1/student/auth/get/${token.token.data.data.userId}`, token.token.data.access_token)
     const [month, setMonth] = useState('');
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
@@ -23,9 +25,8 @@ const MakePayment = () => {
                         }
                     </select>
                     <button className='btn btn-info'
-                        disabled={!(month && student.student)}
-                        onClick={() => makeTuitionPayment(student.student.studentId, student.student.tuitionId, month,
-                            dispatch, setError, setSuccess)}
+                        disabled={!(month && data.studentId && data.tuitionId)}
+                        onClick={() => makeTuitionPayment(token.token.data.access_token, data.studentId, data.tuitionId, month, setError, setSuccess)}
                     >Make Tuition Payment</button>
                 </div>
             </div>

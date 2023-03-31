@@ -1,13 +1,16 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {month as Month} from "../../others/Month";
-import useRegGetAll from "../../services/useRegGetAll";
+import useStudentGetAll from "../../services/useStudentGetAll";
 import {generateReport} from "./helper";
 import Table from "../../components/Table";
 import './styles.css';
+import useTuitionGetAll from "../../services/useTuitionGetAll";
+import {TokenContext} from "../../others/Context";
 
 const TuitionReport = () => {
+    const {token} = useContext(TokenContext);
     const [data, setData] = useState([]);
-    const {data: tuitionList, error: error2, loading} = useRegGetAll("/api/v1/tuition/get/all");
+    const {data: tuitionList, error: error2, loading} = useTuitionGetAll("/api/v1/tuition/get/all", token.token.data.access_token);
     const [month, setMonth] = useState('');
     const [selectedTuition, setSelectedTuition] = useState('');
     const [error, setError] = useState(null);
@@ -32,7 +35,7 @@ const TuitionReport = () => {
                 </select>
                 <button className='btn btn-info'
                     disabled={!(selectedTuition && month)}
-                    onClick={() => generateReport(selectedTuition, month, setError, setData)}
+                    onClick={() => generateReport(token.token.data.access_token, selectedTuition, month, setError, setData)}
                 >Generate Report
                 </button>
             </div>

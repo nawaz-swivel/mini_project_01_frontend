@@ -1,28 +1,25 @@
 import * as types from "../../others/ActionType";
 import * as api from "../../services/api";
 
-export const login = (e, username, pwd, dispatch, studentDispatch, setError) => {
+export const login = (e, username, pwd, dispatch, setError) => {
+    let details = {
+        'grant_type': 'password',
+        'username': username,
+        'password': pwd
+    };
+    let formBody = [];
+    for (let property in details) {
+        let encodedKey = encodeURIComponent(property);
+        let encodedValue = encodeURIComponent(details[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+
     e.preventDefault();
-    if (username === 'admin' && pwd === 'admin') {
+    api.login("/oauth/token", formBody).then(res => {
         dispatch({
             type: types.LOGIN,
-            user: {
-                name: 'ADMIN',
-            }
-        })
-    } else {
-        api.login("/api/v1/student/login", {
-            name: username,
-            password: pwd,
-        }).then(res => {
-            dispatch({
-            type: types.LOGIN,
-            user: res.data.data,
-            });
-            studentDispatch({
-                type: types.LOGIN_STUDENT,
-                student: res.data.data,
-            })
-        }).catch(e => setError(e));
-    }
+            token: res,
+        });
+    }).catch(e => setError(e));
 }

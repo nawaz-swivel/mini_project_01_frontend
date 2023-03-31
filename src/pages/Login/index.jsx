@@ -1,17 +1,16 @@
 import React, {useContext, useState} from "react";
 import './styles.css';
-import {AuthContext, StudentContext} from "../../others/Context";
+import {TokenContext} from "../../others/Context";
 import {login} from "./helper";
-import {Link, Navigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 export default function Login() {
-    const {auth, dispatch} = useContext(AuthContext);
-    const {dispatch: studentDispatch} = useContext(StudentContext);
+    const {token, dispatch} = useContext(TokenContext);
     const [error, setError] = useState(null);
     const [username, setUsername] = useState('');
     const [pwd, setPwd] = useState('');
 
-    if (auth.user) return <Navigate to='/' />
+    if (token.token) return <Navigate to='/'/>
 
     return (
         <>
@@ -36,13 +35,10 @@ export default function Login() {
                         style={{marginRight: 10}}
                         type="submit"
                         className="btn btn-primary"
-                        onClick={(e) => login(e, username, pwd, dispatch, studentDispatch, setError)}
+                        onClick={(e) => login(e, username, pwd, dispatch, setError)}
                     >
                         Login
                     </button>
-                    <Link to='/register'>
-                        <button type="text" className="btn btn-primary">Register</button>
-                    </Link>
                     {
                         error ? (
                             <p className='error-msg'>{error.message}</p>

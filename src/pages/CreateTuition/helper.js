@@ -1,9 +1,9 @@
 import * as types from "../../others/ActionType";
 import * as api from "../../services/api";
 
-export const createTuition = (e, name, location, dispatch, setError, setSuccess) => {
+export const createTuition = (e, token, name, location, dispatch, setError, setSuccess) => {
     e.preventDefault();
-    api.createTuition("/api/v1/tuition/create", {
+    api.createTuition(token, "/api/v1/tuition", {
         name: name,
         location: location,
     }).then(res => {

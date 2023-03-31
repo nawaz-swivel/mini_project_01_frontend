@@ -1,7 +1,7 @@
 import * as api from "../../services/api";
 
-export const makeTuitionPayment = (studentId, tuitionId, month, dispatch, setError, setSuccess) => {
-    api.makeTuitionPayment(`/api/v1/payment/create`, {
+export const makeTuitionPayment = (token, studentId, tuitionId, month, setError, setSuccess) => {
+    api.makeTuitionPayment(token, `/api/v1/payment/make`, {
         studentId,
         tuitionId,
         month

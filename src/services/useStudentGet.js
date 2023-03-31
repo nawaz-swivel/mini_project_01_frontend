@@ -1,7 +1,7 @@
 import React from "react";
-import REGISTRATION_API from "./registration";
+import {STUDENT_API} from "./student";
 
-export default function useRegGetAll(url) {
+export default function useStudentGet(url, token) {
     const isMounted = React.useRef(false);
     const [data, setData] = React.useState(null);
     const [error, setError] = React.useState(null);
@@ -11,7 +11,7 @@ export default function useRegGetAll(url) {
         isMounted.current = true;
         async function init() {
             try {
-                const response = await REGISTRATION_API.get(url);
+                const response = await STUDENT_API(token).get(url);
                 if (response.status === 200) {
                     if (isMounted.current) setData(response.data.data);
                 } else {

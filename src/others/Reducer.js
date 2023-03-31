@@ -1,5 +1,14 @@
 import * as types from "./ActionType";
 
+export const tokenReducer = (tokenState, action) => {
+    switch (action.type) {
+        case types.LOGIN:
+            return { ... tokenState, token: action.token };
+        case types.LOGOUT:
+            return { ...tokenState, token: null };
+    }
+}
+
 export const authReducer = (authState, action) => {
     switch (action.type) {
         case types.LOGIN:

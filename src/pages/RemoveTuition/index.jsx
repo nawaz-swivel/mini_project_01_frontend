@@ -1,9 +1,12 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {deleteTuition} from "./helper";
-import useRegGetAll from "../../services/useRegGetAll";
+import useStudentGetAll from "../../services/useStudentGetAll";
+import useTuitionGetAll from "../../services/useTuitionGetAll";
+import {TokenContext} from "../../others/Context";
 
 const RemoveTuition = () => {
-    const {data, error: error2, loading} = useRegGetAll("/api/v1/tuition/get/all");
+    const { token } = useContext(TokenContext);
+    const {data, error: error2, loading} = useTuitionGetAll("/api/v1/tuition/get/all", token.token.data.access_token);
     const [selectedTuition, setSelectedTuition] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
@@ -21,7 +24,7 @@ const RemoveTuition = () => {
                     </select>
                     <button className='btn btn-danger'
                         disabled={!selectedTuition}
-                        onClick={() => deleteTuition(selectedTuition, setError, setSuccess)}
+                        onClick={() => deleteTuition(token.token.data.access_token, selectedTuition, setError, setSuccess)}
                     >Delete Tuition</button>
                 </div>
             </div>
