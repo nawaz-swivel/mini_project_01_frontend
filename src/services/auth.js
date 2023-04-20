@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url = process.env.REACT_APP_AUTH_API_URL;
+// const url = process.env.REACT_APP_AUTH_API_URL;
+const url = 'http://18.204.14.92:8080/ignite-auth-service';
 
 // const AUTH_API = axios.create({baseURL: 'http://localhost:8080/ignite-auth-service'});
 const AUTH_API = axios.create({baseURL: url});
